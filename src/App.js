@@ -1,20 +1,25 @@
-import React, { useState } from 'react'
+import React, { useState, useCallback } from 'react'
 import './App.css'
 
 const App = () => {
   const [state, setState] = useState(['Johnny', 'Suzy'])
 
-  const handleSubmit = event => {
-    event.preventDefault()
-    const form = event.target
-    setState([...state, form.name.value])
-    form.reset()
-  }
+  const onSubmitCallback = useCallback(
+    event => {
+      event.preventDefault()
+      const form = event.target
+      const name = form.name.value
+      if (state.indexOf(name) !== -1) alert(`${name} is already on the list!`)
+      else setState([...state, form.name.value])
+      form.reset()
+    },
+    [state]
+  )
 
   return (
     <>
       <h1>The IT list</h1>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={onSubmitCallback}>
         <fieldset>
           <legend>Get on the list!</legend>
           <input type='text' name='name' placeholder='Name' autoFocus />
