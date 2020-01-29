@@ -1,4 +1,6 @@
-const cache = window.myCache || {}
+// initialize cache
+window.myCache = window.myCache || {}
+const cache = window.myCache
 
 async function getPostsAsync() {
   if (!cache.posts) {
