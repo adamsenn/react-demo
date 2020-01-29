@@ -20,7 +20,9 @@ const Posts = () => {
       <h1>Posts - {state.posts.length}</h1>
       <ul>
         {state.posts.map(item => (
-          <li key={item.id}>{item.title}</li>
+          <li key={item.id}>
+            {item.user.name} wrote '{item.title}'
+          </li>
         ))}
       </ul>
     </>
