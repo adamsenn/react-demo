@@ -5,12 +5,9 @@ const Bloggers = () => {
   const [state, setState] = useState({ loading: true, bloggers: [] })
 
   useEffect(() => {
-    setTimeout(() => 
-      fetch('https://jsonplaceholder.typicode.com/users')
-        .then(response => response.json())
-        .then(json => setState({ loading: false, bloggers: json })),
-      2000
-    )
+    fetch('https://jsonplaceholder.typicode.com/users')
+      .then(response => response.json())
+      .then(json => setState({ loading: false, bloggers: json }))
   }, [])
 
   if (state.loading) return <h1>Wait for it...</h1>
