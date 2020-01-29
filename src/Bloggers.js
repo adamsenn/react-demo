@@ -14,10 +14,10 @@ const Bloggers = () => {
 
   return (
     <>
-      <h1>Bloggers</h1>
+      <h1>Bloggers - {state.bloggers.length}</h1>
       <ul>
-        {state.bloggers.map((item, idx) => (
-          <li key={idx}>{item.name}</li>
+        {state.bloggers.map(item => (
+          <li key={item.id}>{item.name}</li>
         ))}
       </ul>
     </>
