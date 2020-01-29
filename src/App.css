@@ -1,3 +1,20 @@
 body {
   padding: 1% 2.5%;
 }
+
+nav {
+  border-bottom: 1px solid #333;
+}
+
+nav > ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+nav > ul > li {
+  display: inline-block;
+}
+
+nav > ul > li:not(:first-child) {
+  margin-left: 1em;
+}
