@@ -1,16 +1,15 @@
 import React from 'react'
 import './App.css'
 
-function App() {
-  return
-  ;<>
-    <h1>Super Rad!</h1>
+const App = () => (
+  <>
+    <h1>Get on the list!</h1>
     <form>
       <label>Name:</label>
       <input type='text' name='name' placeholder='Name' />
-      <button type='button'>Add Me</button>
+      <button type='button'>Add Me Now</button>
     </form>
   </>
-}
+)
 
 export default App
