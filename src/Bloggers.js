@@ -1,13 +1,16 @@
 import React, { useState, useEffect } from 'react'
 import './App.css'
+import { getUsersAsync } from './ApiService'
 
 const Bloggers = () => {
   const [state, setState] = useState({ loading: true, bloggers: [] })
 
   useEffect(() => {
-    fetch('https://jsonplaceholder.typicode.com/users')
-      .then(response => response.json())
-      .then(json => setState({ loading: false, bloggers: json }))
+    const loadDataAsync = async () => {
+      const bloggers = await getUsersAsync()
+      setState({ loading: false, bloggers })
+    }
+    loadDataAsync()
   }, [])
 
   if (state.loading) return <h1>Wait for it...</h1>

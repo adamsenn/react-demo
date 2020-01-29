@@ -1,13 +1,16 @@
 import React, { useState, useEffect } from 'react'
 import './App.css'
+import { getPostsAsync } from './ApiService'
 
 const Posts = () => {
   const [state, setState] = useState({ loading: true, posts: [] })
 
   useEffect(() => {
-    fetch('https://jsonplaceholder.typicode.com/posts')
-      .then(response => response.json())
-      .then(json => setState({ loading: false, posts: json }))
+    const loadDataAsync = async () => {
+      const posts = await getPostsAsync()
+      setState({ loading: false, posts })
+    }
+    loadDataAsync()
   }, [])
 
   if (state.loading) return <h1>Wait for it...</h1>
