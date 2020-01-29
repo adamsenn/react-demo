@@ -1,7 +1,11 @@
 import React, { useState, useCallback } from 'react'
 import './App.css'
 
-const Posts = () => {
+fetch('https://jsonplaceholder.typicode.com/users')
+  .then(response => response.json())
+  .then(json => console.log(json))
+
+const Bloggers = () => {
   const [state, setState] = useState(['Johnny', 'Suzy'])
 
   const onSubmitCallback = useCallback(
@@ -18,14 +22,7 @@ const Posts = () => {
 
   return (
     <>
-      <h1>Posts</h1>
-      <form onSubmit={onSubmitCallback}>
-        <fieldset>
-          <legend>Get on the list!</legend>
-          <input type='text' name='name' placeholder='Name' autoFocus />
-          <button type='button'>Add Me Now</button>
-        </fieldset>
-      </form>
+      <h1>Bloggers</h1>
       <ul>
         {state.map((item, idx) => (
           <li key={idx}>{item}</li>
@@ -35,4 +32,4 @@ const Posts = () => {
   )
 }
 
-export default Posts
+export default Bloggers

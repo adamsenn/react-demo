@@ -1,7 +1,7 @@
 import React from 'react'
 import { HashRouter as Router, Link, Switch, Route, Redirect } from 'react-router-dom'
 import ItList from './ItList'
-import Posts from './Posts'
+import Bloggers from './Posts'
 
 import './App.css'
 
@@ -10,17 +10,17 @@ const App = () => (
     <nav>
       <ul>
         <li>
-          <Link to='/cool-kids'>Cool Kids</Link>
+          <Link to='/bloggers'>Bloggers</Link>
         </li>
         <li>
-          <Link to='/posts'>Posts</Link>
+          <Link to='/cool-kids'>Cool Kids</Link>
         </li>
       </ul>
     </nav>
     <Switch>
+      <Route exact path='/bloggers' component={Bloggers} />
       <Route exact path='/cool-kids' component={ItList} />
-      <Route exact path='/posts' component={Posts} />
-      <Redirect to='/cool-kids' />
+      <Redirect to='/bloggers' />
     </Switch>
   </Router>
 )
