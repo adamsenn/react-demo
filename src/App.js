@@ -1,7 +1,7 @@
 import React from 'react'
 import { HashRouter as Router, Link, Switch, Route, Redirect } from 'react-router-dom'
 import ItList from './ItList'
-import Bloggers from './Posts'
+import Bloggers from './Bloggers'
 
 import './App.css'
 
