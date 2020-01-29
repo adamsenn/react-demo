@@ -27,8 +27,8 @@ const App = () => {
         </fieldset>
       </form>
       <ul>
-        {state.map(item => (
-          <li key={item}>{item}</li>
+        {state.map((item, idx) => (
+          <li key={idx}>{item}</li>
         ))}
       </ul>
     </>
