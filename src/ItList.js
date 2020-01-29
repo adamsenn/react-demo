@@ -1,5 +1,4 @@
 import React, { useState, useCallback } from 'react'
-import './App.css'
 
 const ItList = () => {
   const [state, setState] = useState(['Johnny', 'Suzy'])
