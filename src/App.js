@@ -1,36 +1,33 @@
-import React, { useState } from 'react'
+import React from 'react'
+import { HashRouter as Router, Link, Switch, Route, Redirect } from 'react-router-dom'
+import Bloggers from './Bloggers'
+import Posts from './Posts'
+import ItList from './ItList'
+
 import './App.css'
 
-function App() {
-  const [users, setUsers] = useState(['Lucy', 'Luke'])
-
-  const submitCallback = event => {
-    event.preventDefault()
-    const newName = event.target.name.value
-    setUsers([...users, newName])
-  }
-
-  return (
-    <>
-      <h1>IT List</h1>
-      <form onSubmit={submitCallback}>
-        <fieldset>
-          <legend>Add Me to the List</legend>
-          <input type='text' name='name' placeholder='name' />
-          <button type='submit'>Add Me Please!</button>
-        </fieldset>
-      </form>
+const App = () => (
+  <Router>
+    <nav>
       <ul>
-        {users.map((username, idx) => (
-          <li key={idx}>{username}</li>
-        ))}
+        <li>
+          <Link to='/bloggers'>Bloggers</Link>
+        </li>
+        <li>
+          <Link to='/posts'>Posts</Link>
+        </li>
+        <li>
+          <Link to='/cool-kids'>Cool Kids</Link>
+        </li>
       </ul>
-    </>
-  )
-}
+    </nav>
+    <Switch>
+      <Route exact path='/bloggers' component={Bloggers} />
+      <Route exact path='/posts' component={Posts} />
+      <Route exact path='/cool-kids' component={ItList} />
+      <Redirect to='/bloggers' />
+    </Switch>
+  </Router>
+)
 
 export default App
-
-/*
-{x:123} -> </>  -> events
-*/
