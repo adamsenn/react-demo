@@ -1,0 +1,23 @@
+version: 0.2
+
+env:
+  variables:
+    REACT_APP_TEST: "If you're seeing this text, the variable worked! Yay!"
+
+phases:
+  install:
+    commands:      
+      - echo Installing dependencies...
+      - npm install
+  pre_build:
+    commands:
+      - echo Running tests...
+      - npm test --watchAll=false
+  build:
+    commands:
+      - echo Building...
+      - npm run build
+
+artifacts:
+  files:
+    - '**/*'
