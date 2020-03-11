@@ -12,7 +12,7 @@ phases:
   pre_build:
     commands:
       - echo Running tests...
-      - npm test --watchAll=false
+      - npm test
   build:
     commands:
       - echo Building...
