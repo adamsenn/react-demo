@@ -25,7 +25,7 @@ const App = () => (
       <Route exact path='/bloggers' component={Bloggers} />
       <Route exact path='/posts' component={Posts} />
       <Route exact path='/cool-kids' component={ItList} />
-      <Redirect to='/bloggers' />
+      <Redirect to='/cool-kids' />
     </Switch>
   </Router>
 )

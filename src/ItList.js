@@ -22,7 +22,7 @@ const ItList = () => {
         <fieldset>
           <legend>Get on the list!</legend>
           <input type='text' name='name' placeholder='Name' autoFocus />
-          <button type='button'>Add Me Now</button>
+          <button type='submit'>Add Me Now</button>
         </fieldset>
       </form>
       <ul>
