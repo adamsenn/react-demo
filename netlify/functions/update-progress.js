@@ -2,7 +2,7 @@ const fetch = require('node-fetch')
 
 exports.handler = async function (event, context) {
     const { subdomain, callbackUrl, sessionToken, progressInfo } = JSON.parse(event.body)
-    const progressApiEndpoint = new URL(`https://${subdomain}.csod.com`, callbackUrl, `progress?sessionToken=${sessionToken}`)
+    const progressApiEndpoint = new URL([callbackUrl, `progress?sessionToken=${sessionToken}`], `https://${subdomain}.csod.com`)
 
     const response = await fetch(progressApiEndpoint, {
         method: 'POST',
