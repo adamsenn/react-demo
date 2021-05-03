@@ -1,4 +1,4 @@
-import React, { Fragment, useCallback, useEffect, useState } from 'react'
+import React, { Fragment, useCallback, useState } from 'react'
 
 const getUrlParameter = function (name) {
   const match = RegExp('[?&]' + name + '=([^&]*)', 'i').exec(window.location.search)
@@ -10,9 +10,6 @@ const csodParams = ['courseId', 'userGuid', 'sessionToken', 'callbackUrl', 'subd
   agg[curr] = getUrlParameter(curr)
   return agg
 }, {})
-let callbackUrlWithSlashes = csodParams.callbackUrl[0] !== '/' ? `/${csodParams.callbackUrl}` : csodParams.callbackUrl
-callbackUrlWithSlashes = callbackUrlWithSlashes[callbackUrlWithSlashes.length - 1] !== '/' ? `${callbackUrlWithSlashes}/` : callbackUrlWithSlashes
-const progressApiEndpoint = `https://${csodParams.subdomain}.csod.com${callbackUrlWithSlashes}progress?sessionToken=${csodParams.sessionToken}`
 const progressData = [{
   courseId: csodParams.courseId,
   userGuid: csodParams.userGuid,
@@ -28,21 +25,13 @@ const progressData = [{
 }]
 
 const CourseLauncher = () => {
-  const [canSubmit, setCanSubmit] = useState(false)
-  const [user, setUser] = useState('')
-  const [password, setPassword] = useState('')
   const [progressInfo, setProgressInfo] = useState(JSON.stringify(progressData, null, 2))
-
-  useEffect(() => setCanSubmit(user && password), [user, password, setCanSubmit])
 
   const onSubmitCallback = useCallback(
     event => {
       event.preventDefault()
-      fetch(progressApiEndpoint, {
+      fetch('/.netlify/functions/update-progress', {
         method: 'POST',
-        headers: {
-          Authorization: `Basic ${btoa(user + ":" + password)}`
-        },
         body: progressInfo
       }).then(r => {
         console.log(r)
@@ -51,31 +40,22 @@ const CourseLauncher = () => {
         alert('Error: ' + err)
       })
     },
-    [user, password, progressInfo]
+    [progressInfo]
   )
 
   return (
     <>
       <h1>DXC Course Launcher</h1>
-      <div style={{ display: 'flex' }}>
+      <div style={{ display: 'flex', marginTop: '2em' }}>
         <dl style={{ flex: '0 0 auto', paddingRight: '50px' }}>
           {Object.entries(csodParams).map(([key, value]) => <Fragment key={key}><dt>{key}</dt><dd>{value}</dd></Fragment>)}
         </dl>
-        <div style={{ flex: '1 1 auto' }}>
-          <strong>{progressApiEndpoint}</strong>
-          <form method='POST' target={progressApiEndpoint} onSubmit={onSubmitCallback}>
-            <div>
-              <label style={{ fontWeight: 'bold', width: '6em' }}>User</label><input type='text' autoFocus value={user} onChange={evt => setUser(evt.target.value)}></input>
-            </div>
-            <div>
-              <label style={{ fontWeight: 'bold', width: '6em' }}>Password</label><input type='text' value={password} onChange={evt => setPassword(evt.target.value)}></input>
-            </div>
-            <textarea name='progressInfo' value={progressInfo} style={{ height: '480px', width: '100%' }} onChange={evt => setProgressInfo(evt.target.value)}></textarea>
-            <div style={{ textAlign: 'right' }}>
-              <button type='submit' disabled={!canSubmit}>Send Progress to CSOD</button>
-            </div>
-          </form>
-        </div>
+        <form onSubmit={onSubmitCallback} style={{ flex: '1 1 auto' }}>
+          <textarea name='progressInfo' value={progressInfo} style={{ height: '480px', width: '100%' }} onChange={evt => setProgressInfo(evt.target.value)}></textarea>
+          <div style={{ textAlign: 'right' }}>
+            <button type='submit'>Send Progress to CSOD</button>
+          </div>
+        </form>
       </div>
     </>
   )

@@ -28,6 +28,10 @@ button {
   padding: 0.8em 1.2em;
 }
 
+dt {
+  color: #dd0;
+}
+
 input {
   padding: 0.4em 0.8em;
 }
