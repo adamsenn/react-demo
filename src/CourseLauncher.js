@@ -10,7 +10,9 @@ const csodParams = ['courseId', 'userGuid', 'sessionToken', 'callbackUrl', 'subd
   agg[curr] = getUrlParameter(curr)
   return agg
 }, {})
-const progressApiEndpoint = `https://${csodParams.subdomain}.csod.com/${csodParams.callbackUrl}/progress?sessionToken=${csodParams.sessionToken}`
+let callbackUrlWithSlashes = csodParams.callbackUrl[0] !== '/' ? `/${csodParams.callbackUrl}` : csodParams.callbackUrl
+callbackUrlWithSlashes = callbackUrlWithSlashes[callbackUrlWithSlashes.length - 1] !== '/' ? `${callbackUrlWithSlashes}/` : callbackUrlWithSlashes
+const progressApiEndpoint = `https://${csodParams.subdomain}.csod.com${callbackUrlWithSlashes}progress?sessionToken=${csodParams.sessionToken}`
 const progressData = [{
   courseId: csodParams.courseId,
   userGuid: csodParams.userGuid,
