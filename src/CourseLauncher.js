@@ -56,7 +56,7 @@ const CourseLauncher = () => {
 
   return (
     <>
-      <h1>Course Launcher</h1>
+      <h1>DXC Course Launcher</h1>
       <div style={{ display: 'flex' }}>
         <dl style={{ flex: '0 0 auto', paddingRight: '50px' }}>
           {Object.entries(csodParams).map(([key, value]) => <Fragment key={key}><dt>{key}</dt><dd>{value}</dd></Fragment>)}
