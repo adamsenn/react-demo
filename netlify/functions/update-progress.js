@@ -1,8 +1,10 @@
 const fetch = require('node-fetch')
+const urljoin = require('url-join')
+
 
 exports.handler = async function (event, context) {
     const { subdomain, callbackUrl, sessionToken, progressInfo } = JSON.parse(event.body)
-    const progressApiEndpoint = new URL([callbackUrl, `progress?sessionToken=${sessionToken}`], `https://${subdomain}.csod.com`)
+    const progressApiEndpoint = urljoin(`https://${subdomain}.csod.com`, callbackUrl, `progress?sessionToken=${sessionToken}`)
     const base64Credentials = Buffer.from(`${process.env.CSOD_USER}:${process.env.CSOD_PASSWORD}`).toString('base64')
 
     const response = await fetch(progressApiEndpoint, {
@@ -11,8 +13,5 @@ exports.handler = async function (event, context) {
         body: progressInfo
     })
 
-    return {
-        statusCode: 200,
-        body: await response.text()
-    }
+    return response
 }
