@@ -55,11 +55,11 @@ const CourseLauncher = () => {
   return (
     <>
       <h1>Course Launcher</h1>
-      <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+      <div style={{ display: 'flex' }}>
         <dl style={{ flex: '0 0 auto', paddingRight: '50px' }}>
           {Object.entries(csodParams).map(([key, value]) => <Fragment key={key}><dt>{key}</dt><dd>{value}</dd></Fragment>)}
         </dl>
-        <div style={{ flex: '1 1 auto' }}>
+        <div style={{ flex: '1 1 auto', maxWidth: '825px' }}>
           <strong>{progressApiEndpoint}</strong>
           <form method='POST' target={progressApiEndpoint} onSubmit={onSubmitCallback}>
             <div>
@@ -68,7 +68,7 @@ const CourseLauncher = () => {
             <div>
               <label style={{ fontWeight: 'bold', width: '6em' }}>Password</label><input type='text' value={password} onChange={evt => setPassword(evt.target.value)}></input>
             </div>
-            <textarea name='progressInfo' value={progressInfo} style={{ height: 'calc(100vh - 250px)', width: '100%' }} onChange={evt => setProgressInfo(evt.target.value)}></textarea>
+            <textarea name='progressInfo' value={progressInfo} style={{ height: '480px', width: '100%' }} onChange={evt => setProgressInfo(evt.target.value)}></textarea>
             <div style={{ textAlign: 'right' }}>
               <button type='submit' disabled={!canSubmit}>Send Progress to CSOD</button>
             </div>
