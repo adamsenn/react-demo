@@ -13,5 +13,10 @@ exports.handler = async function (event, context) {
         body: progressInfo
     })
 
-    return response
+    const content = await response.text()
+
+    return {
+        statusCode: 200,
+        body: `${response.statusCode}: ${content}`
+    }
 }
