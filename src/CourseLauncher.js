@@ -10,6 +10,7 @@ const csodParams = ['courseId', 'userGuid', 'sessionToken', 'callbackUrl', 'subd
   agg[curr] = getUrlParameter(curr)
   return agg
 }, {})
+
 const progressData = [{
   courseId: csodParams.courseId,
   userGuid: csodParams.userGuid,
@@ -32,10 +33,14 @@ const CourseLauncher = () => {
       event.preventDefault()
       fetch('/.netlify/functions/update-progress', {
         method: 'POST',
-        body: progressInfo
+        body: JSON.stringify({
+          subdomain: csodParams.subdomain,
+          callbackUrl: csodParams.callbackUrl,
+          sessionToken: csodParams.sessionToken,
+          progressInfo
+        })
       }).then(r => {
-        console.log(r)
-        alert('Success!')
+        alert(`${r.status}: ${r.statusText}`)
       }).catch(err => {
         alert('Error: ' + err)
       })
