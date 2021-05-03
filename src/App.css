@@ -1,4 +1,8 @@
 body {
+  background-color: #333;
+  color: #eee;
+  margin: 0 auto;
+  max-width: 1250px;
   padding: 1% 2.5%;
 }
 
@@ -17,4 +21,23 @@ nav > ul > li {
 
 nav > ul > li:not(:first-child) {
   margin-left: 1em;
+}
+
+button {
+  background-color: #3b3;
+  padding: 0.8em 1.2em;
+}
+
+input {
+  padding: 0.4em 0.8em;
+}
+
+input, textarea {
+  background-color: #ddd;
+}
+
+button, input, textarea {
+  border-radius: 0;
+  border-style: hidden;
+  margin: 0.2em 0;
 }

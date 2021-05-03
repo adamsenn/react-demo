@@ -59,7 +59,7 @@ const CourseLauncher = () => {
         <dl style={{ flex: '0 0 auto', paddingRight: '50px' }}>
           {Object.entries(csodParams).map(([key, value]) => <Fragment key={key}><dt>{key}</dt><dd>{value}</dd></Fragment>)}
         </dl>
-        <div style={{ flex: '1 1 auto', maxWidth: '825px' }}>
+        <div style={{ flex: '1 1 auto' }}>
           <strong>{progressApiEndpoint}</strong>
           <form method='POST' target={progressApiEndpoint} onSubmit={onSubmitCallback}>
             <div>
