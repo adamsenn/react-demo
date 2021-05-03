@@ -1,14 +1,7 @@
-import crypto from 'crypto'
+const { v4: uuidv4 } = require('uuid')
 
 exports.handler = async function (event, context) {
-    const uuidParts = [
-        crypto.randomBytes(8),
-        crypto.randomBytes(4),
-        crypto.randomBytes(4),
-        crypto.randomBytes(4),
-        crypto.randomBytes(12)
-    ]
-    const courseId = uuidParts.map(b => b.toString('hex')).join('-')
+    const courseId = uuidv4()
     const timestamp = new Date()
     return {
         statusCode: 200,
