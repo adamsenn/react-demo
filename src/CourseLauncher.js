@@ -37,7 +37,7 @@ const CourseLauncher = () => {
           subdomain: csodParams.subdomain,
           callbackUrl: csodParams.callbackUrl,
           sessionToken: csodParams.sessionToken,
-          progressInfo
+          progressInfo: JSON.parse(progressInfo)
         })
       }).then(r => {
         alert(`${r.status}: ${r.statusText}`)
