@@ -1,14 +1,24 @@
+import crypto from 'crypto'
+
 exports.handler = async function (event, context) {
+    const uuidParts = [
+        crypto.randomBytes(8),
+        crypto.randomBytes(4),
+        crypto.randomBytes(4),
+        crypto.randomBytes(4),
+        crypto.randomBytes(12)
+    ]
+    const courseId = uuidParts.map(b => b.toString('hex')).join('-')
+    const timestamp = new Date()
     return {
         statusCode: 200,
         body: JSON.stringify([{
-            "ID": "00000000-0000-0000-0000-000000000001",
-            "Title": "Example Course",
-            "URL": "http://ExampleProvider.com/example-course",
+            "ID": courseId,
+            "Title": `Example Course ${timestamp.toISOString()}`,
+            "URL": `https://as-react-demo.netlify.app/#/launch/${courseId}`,
             "IsActive": true,
             "IsMobile": true,
             "Description": "This is text describing the example course.",
-            "Thumbnail": "http:// ExampleProvider.com/example-course/image",
             "Version": "1.0",
             "Owners": [{
                 "Name": "The Example Provider Content Partner"
@@ -23,23 +33,23 @@ exports.handler = async function (event, context) {
             "Languages": [
                 "en-US"
             ],
-            "LastModifiedUTC": "2017-11-23T08:38:54.7573396+00:00",
+            "LastModifiedUTC": timestamp.toISOString(),
             "Duration": "00:30:00",
             "MaxScore": 100,
             "MasteryScore": 65,
             "Subjects": [
                 "Personal Development"
             ],
-            "PublicationDate": "2019-09-02T14:13:50.001Z",
+            "PublicationDate": timestamp.toISOString(),
             "Keywords": "Keyword 1, Keyword 2, Keyword 3",
             "Localization": [{
-                "Title": "curso de ejemplo",
+                "Title": `curso de  ${timestamp.toISOString()}`,
                 "Description": "descripción",
                 "Language": "es-ES",
                 "Keywords": "ejemplo, español"
             },
             {
-                "Title": "exemple de cours",
+                "Title": `exemple de  ${timestamp.toISOString()}`,
                 "Description": "description du cours à écrire en français",
                 "Language": "fr-FR",
                 "Keywords": "français, contenu"
