@@ -8,13 +8,13 @@ exports.handler = async function (event, context) {
         body: JSON.stringify([{
             "ID": courseId,
             "Title": `Example Course ${timestamp.toISOString()}`,
-            "URL": `https://as-react-demo.netlify.app/#/launch/${courseId}`,
+            "URL": `https://as-react-demo.netlify.app/?courseId=${courseId}`,
             "IsActive": true,
             "IsMobile": true,
             "Description": "This is text describing the example course.",
             "Version": "1.0",
             "Owners": [{
-                "Name": "The Example Provider Content Partner"
+                "Name": "DXC HCM"
             }],
             "Instructors": [{
                 "Title": "Mr",
@@ -36,21 +36,18 @@ exports.handler = async function (event, context) {
             "PublicationDate": timestamp.toISOString(),
             "Keywords": "Keyword 1, Keyword 2, Keyword 3",
             "Localization": [{
-                "Title": `curso de  ${timestamp.toISOString()}`,
+                "Title": `Curso de ${timestamp.toISOString()}`,
                 "Description": "descripción",
                 "Language": "es-ES",
                 "Keywords": "ejemplo, español"
             },
             {
-                "Title": `exemple de  ${timestamp.toISOString()}`,
+                "Title": `Exemple de ${timestamp.toISOString()}`,
                 "Description": "description du cours à écrire en français",
                 "Language": "fr-FR",
                 "Keywords": "français, contenu"
             }],
-            "Modalities": [
-                "Watch",
-                "Read"
-            ]
+            "Modalities": ["Watch"]
         }
         ]
         )
