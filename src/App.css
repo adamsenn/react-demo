@@ -45,3 +45,9 @@ button, input, textarea {
   border-style: hidden;
   margin: 0.2em 0;
 }
+
+footer {
+  color: #777;
+  font-size: 0.8em;
+  text-align: center;
+}
