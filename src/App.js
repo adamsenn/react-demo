@@ -35,7 +35,7 @@ const App = () => (
         <Redirect to='/launch' />
       </Switch>
     </Router> */}
-    <footer>{process.env.REACT_APP_COMMIT || 'local'}</footer>
+    <footer>{process.env.REACT_APP_VERSION || 'local'}</footer>
   </>
 )
 
