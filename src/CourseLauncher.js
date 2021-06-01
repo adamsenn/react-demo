@@ -12,17 +12,19 @@ const csodParams = ['courseId', 'userGuid', 'sessionToken', 'callbackUrl', 'subd
 }, {})
 
 const progressData = [{
-  courseId: csodParams.courseId,
   userGuid: csodParams.userGuid,
+  courseId: csodParams.courseId,
   status: "Completed",
   userScore: 100,
   totalTime: "00:12:34",
   timesAccessed: 1,
+  completionDate: timestamp.toISOString(),
+  lastTimeAccessed: timestamp.toISOString(),
   successStatus: "Pass",
+	bookmark: "string",
+	suspendData: "string",
   progress: 100,
   registrationDate: "2021-05-01T12:34:56.789Z",
-  completionDate: timestamp.toISOString(),
-  lastTimeAccessed: timestamp.toISOString()
 }]
 
 const CourseLauncher = () => {
@@ -33,12 +35,7 @@ const CourseLauncher = () => {
       event.preventDefault()
       fetch('/.netlify/functions/update-progress', {
         method: 'POST',
-        body: JSON.stringify({
-          subdomain: csodParams.subdomain,
-          callbackUrl: csodParams.callbackUrl,
-          sessionToken: csodParams.sessionToken,
-          progressInfo: JSON.parse(progressInfo)
-        })
+        body: progressInfo
       }).then(r => {
         alert(`${r.status}: ${r.statusText}`)
       }).catch(err => {
