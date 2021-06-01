@@ -1,0 +1,21 @@
+title OC to CSOD
+
+OC -> OC: courses created
+
+alt periodically
+    DXC -> OC: get courses
+    OC --> DXC: courses
+    DXC -> DXC: store courses in db for API
+end
+
+
+alt periodically
+    CSOD -> DXC: GET: pull courses from API
+    DXC --> CSOD: courses
+    CSOD -> CSOD: update course catalog
+end
+
+CSOD -> DXC: GET: user launches course
+DXC -> DXC: store session info in db
+DXC -> DXC: enter creds + progress JSON
+DXC -> CSOD: POST: user progress
