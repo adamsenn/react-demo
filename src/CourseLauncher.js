@@ -16,15 +16,10 @@ const progressData = [{
   courseId: csodParams.courseId,
   status: "Completed",
   userScore: 100,
-  totalTime: "00:12:34",
-  timesAccessed: 1,
   completionDate: timestamp.toISOString(),
   lastTimeAccessed: timestamp.toISOString(),
   successStatus: "Pass",
-	bookmark: "string",
-	suspendData: "string",
-  progress: 100,
-  registrationDate: "2021-05-01T12:34:56.789Z",
+  progress: 100
 }]
 
 const CourseLauncher = () => {
@@ -37,10 +32,8 @@ const CourseLauncher = () => {
         method: 'POST',
         body: progressInfo
       }).then(r => {
-        alert(`${r.status}: ${r.statusText}`)
-      }).catch(err => {
-        alert('Error: ' + err)
-      })
+        r.text().then(alert)
+      }).catch(alert)
     },
     [progressInfo]
   )
