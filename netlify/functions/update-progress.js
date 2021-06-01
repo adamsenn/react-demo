@@ -15,7 +15,7 @@ exports.handler = async function (event, context) {
             Authorization: `Basic ${base64Credentials}`,
             'Content-Type': 'application/json'
          },
-        body: progressInfo
+        body: JSON.stringify(progressInfo)
     })
 
     const content = await response.text()
