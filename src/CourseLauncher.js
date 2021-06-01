@@ -30,9 +30,14 @@ const CourseLauncher = () => {
       event.preventDefault()
       fetch('/.netlify/functions/update-progress', {
         method: 'POST',
-        body: progressInfo
+        body: JSON.stringify({
+          subdomain: csodParams.subdomain,
+          callbackUrl: csodParams.callbackUrl,
+          sessionToken: csodParams.sessionToken,
+          progressInfo: JSON.parse(progressInfo)
+        })
       }).then(r => {
-        r.text().then(alert)
+        r.text().then(content => alert(`Response code: ${r.status}\nContent:\n${content}`))
       }).catch(alert)
     },
     [progressInfo]
