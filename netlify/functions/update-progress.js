@@ -11,7 +11,10 @@ exports.handler = async function (event, context) {
 
     const response = await fetch(progressApiEndpoint, {
         method: 'POST',
-        headers: { Authorization: `Basic ${base64Credentials}` },
+        headers: {
+            Authorization: `Basic ${base64Credentials}`,
+            'Content-Type': 'application/json'
+         },
         body: progressInfo
     })
 
