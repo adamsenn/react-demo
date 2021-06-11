@@ -1,21 +1,23 @@
 title OC to CSOD
 
-OC -> OC: courses created
+actor user
 
-alt periodically
-    DXC -> OC: get courses
-    OC --> DXC: courses
-    DXC -> DXC: store courses in db for API
+seq periodically
+    CSOD  -> DXC: GET /course-list
+    DXC -> OC: get paths
+    DXC -> DXC: transform
+    DXC --> CSOD : courses
 end
 
+user -> CSOD : launch course
+CSOD  -> DXC: launch course
+DXC -> DXC: capture user-course mapping
+DXC -> OC: launch course
 
-alt periodically
-    CSOD -> DXC: GET: pull courses from API
-    DXC --> CSOD: courses
-    CSOD -> CSOD: update course catalog
+seq periodically
+    loop for all incomplete user-course mappings
+        DXC -> OC: get course progression
+        DXC -> DXC: update user-course mapping
+        DXC -> CSOD : POST: user progress
+    end
 end
-
-CSOD -> DXC: GET: user launches course
-DXC -> DXC: store session info in db
-DXC -> DXC: enter creds + progress JSON
-DXC -> CSOD: POST: user progress
